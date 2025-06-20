@@ -1,8 +1,19 @@
 name: CD
 
 on:
-  push:
-    branches: ["main"]
+  # push:
+  #   branches: ["main"]
+
+  workflow_dispatch:
+    inputs:
+      image:
+        required: true
+        description: 'Enter image repository'
+        default: ''
+      tag:
+        required: true
+        description: 'Enter image tag'
+        default: ''
 
 jobs:
   deploy:
@@ -30,4 +41,4 @@ jobs:
         run: gcloud container clusters get-credentials cluster-1 --region us-central1 --project my-project11-463500
 
       - name: Install app
-        run: helm upgrade --install flask ./flask
+        run: helm upgrade --install flask ./flask --set deployment.image.reposotory=${{ inputs.image }} --set deployment.image.tag=${{ inputs.tag }}
