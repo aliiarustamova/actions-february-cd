@@ -34,7 +34,7 @@ jobs:
       - name: Set Project
         run: gcloud config set project my-project11-463500
 
-      - name: Install gloud auth plugin
+      - name: Install gcloud auth plugin
         run: gcloud components install gke-gcloud-auth-plugin
 
       - name: Generate kube config file
