@@ -3,31 +3,31 @@ name: CD
 on:
   push:
     branches: ["main"]
-    
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout SCM
-      uses: actions/checkout@v4
+      - name: Checkout SCM
+        uses: actions/checkout@v4
 
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@v2
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
 
-    - name: Login to GCP
-      uses: google-github-actions/auth@v2
-      with:
-        credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+      - name: Login to GCP 
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
-    - name: Set Project
-      run: gloud config set project my-project11-463500
+      - name: Set Project
+        run: gloud config set project my-project11-463500
 
-    - name: Install gloud auth plugin
-      run: gcloud components install gke-gcloud-auth-plugin
+      - name: Install gloud auth plugin
+        run: gcloud components install gke-gcloud-auth-plugin
 
-    - name: Generate kube config file
-      run: gcloud container clusters get-credentials cluster-1 --region us-central1 --project my-project11-463500
+      - name: Generate kube config file
+        run: gcloud container clusters get-credentials cluster-1 --region us-central1 --project my-project11-463500
 
-    - name: test
-      run: kubectl get nodes
+      - name: test
+        run: kubectl get nodes
